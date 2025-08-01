@@ -1,6 +1,6 @@
 enum Affordability { affordable, medium, pricey }
 
-enum Complexity { simple, challenging, hard }
+enum Complexity { easy, moderate, complex }
 
 class Meal {
   const Meal({
@@ -22,7 +22,7 @@ class Meal {
   final List<String> categories;
   final String title;
   final String imageUrl;
-  final int duration;
+  final String duration;
   final Affordability affordability;
   final Complexity complexity;
   final List<String> ingredients;

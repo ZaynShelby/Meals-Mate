@@ -9,7 +9,16 @@ class MealDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(meal.title), centerTitle: true),
+      appBar: AppBar(
+        title: Text(meal.title),
+        centerTitle: true,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 15),
+            child: Icon(Icons.star_border),
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -19,6 +28,7 @@ class MealDetails extends StatelessWidget {
               'Ingredients',
               style: Theme.of(context).textTheme.titleLarge!.copyWith(
                 color: Theme.of(context).colorScheme.primary,
+                fontWeight: FontWeight.w700,
               ),
             ),
             SizedBox(height: 10),
@@ -30,6 +40,7 @@ class MealDetails extends StatelessWidget {
                   ingredient,
                   style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                     color: Theme.of(context).colorScheme.onBackground,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
               ),
@@ -40,6 +51,7 @@ class MealDetails extends StatelessWidget {
               'Steps',
               style: Theme.of(context).textTheme.titleLarge!.copyWith(
                 color: Theme.of(context).colorScheme.primary,
+                fontWeight: FontWeight.w700,
               ),
             ),
             SizedBox(height: 10),
@@ -52,6 +64,7 @@ class MealDetails extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                     color: Theme.of(context).colorScheme.onBackground,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
               ),

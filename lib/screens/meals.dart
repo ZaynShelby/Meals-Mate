@@ -48,7 +48,10 @@ class MealsScreen extends StatelessWidget {
       );
     }
     return Scaffold(
-      appBar: AppBar(title: Text(title), centerTitle: true),
+      appBar: AppBar(
+        title: Text(title, style: TextStyle(fontWeight: FontWeight.w800)),
+        centerTitle: true,
+      ),
       body: content,
     );
   }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mealmate/widgets/tab_screen.dart';
+import 'package:mealmate/screens/tab_screen.dart';
 
 final theme = ThemeData(
   useMaterial3: true,

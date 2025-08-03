@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class MainDrawer extends StatelessWidget {
-  const MainDrawer({super.key, required this.onCategoryPage});
+  const MainDrawer({super.key, required this.onSelectScreen});
 
-  final void Function() onCategoryPage;
+  final void Function(String identifier) onSelectScreen;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class MainDrawer extends StatelessWidget {
           ),
           ListTile(
             onTap: () {
-              onCategoryPage();
+              onSelectScreen('category');
             },
             title: Text(
               'Category',
@@ -46,7 +46,9 @@ class MainDrawer extends StatelessWidget {
             leading: Icon(Icons.category, size: 30),
           ),
           ListTile(
-            onTap: () {},
+            onTap: () {
+              onSelectScreen('filters');
+            },
             title: Text(
               'Filters',
               style: Theme.of(context).textTheme.titleLarge!.copyWith(

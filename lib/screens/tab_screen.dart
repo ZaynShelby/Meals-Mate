@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mealmate/models/meal.dart';
 import 'package:mealmate/screens/categories.dart';
+import 'package:mealmate/screens/filters.dart';
 import 'package:mealmate/screens/meals.dart';
 import 'package:mealmate/widgets/main_drawer.dart';
 
@@ -13,6 +14,7 @@ class TabScreen extends StatefulWidget {
 
 class _TabScreenState extends State<TabScreen> {
   int selectedPageIndex = 0;
+
   final List<Meal> _favouriteMeals = [];
   void _showInfoMessage(String message) {
     ScaffoldMessenger.of(context).clearSnackBars();
@@ -39,10 +41,17 @@ class _TabScreenState extends State<TabScreen> {
     });
   }
 
-  void _chosenPage() {
-    Navigator.of(
-      context,
-    ).push(MaterialPageRoute(builder: (context) => TabScreen()));
+  void _setScreen(String identifier) {
+    Navigator.of(context).pop();
+    if (identifier == 'filters') {
+      Navigator.of(
+        context,
+      ).push(MaterialPageRoute(builder: (context) => FilterScreen()));
+    } else {
+      Navigator.of(
+        context,
+      ).push(MaterialPageRoute(builder: (context) => TabScreen()));
+    }
   }
 
   @override
@@ -60,7 +69,7 @@ class _TabScreenState extends State<TabScreen> {
       activePageTitle = Text('Favourites');
     }
     return Scaffold(
-      drawer: MainDrawer(onCategoryPage: _chosenPage),
+      drawer: MainDrawer(onSelectScreen: _setScreen),
       appBar: AppBar(title: activePageTitle, centerTitle: true),
       body: activePage,
       bottomNavigationBar: BottomNavigationBar(

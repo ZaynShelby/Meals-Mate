@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:mealmate/models/meal.dart';
 
 class MealDetails extends StatelessWidget {
-  const MealDetails({super.key, required this.meal});
+  const MealDetails({
+    super.key,
+    required this.meal,
+    required this.toggleFavouriteMeal,
+  });
 
   final Meal meal;
-
+  final void Function(Meal meal) toggleFavouriteMeal;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,9 +17,11 @@ class MealDetails extends StatelessWidget {
         title: Text(meal.title),
         centerTitle: true,
         actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 15),
-            child: Icon(Icons.star_border),
+          IconButton(
+            onPressed: () {
+              toggleFavouriteMeal(meal);
+            },
+            icon: Icon(Icons.star),
           ),
         ],
       ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mealmate/models/meal.dart';
+import 'package:mealmate/provider/favourite_provider.dart';
 import 'package:mealmate/provider/meals_provider.dart';
 import 'package:mealmate/screens/categories.dart';
 import 'package:mealmate/screens/filters.dart';
@@ -25,26 +25,6 @@ class _TabScreenState extends ConsumerState<TabScreen> {
   int selectedPageIndex = 0;
 
   Map<Filter, bool> _selectedFilters = kInitialFilter;
-
-  final List<Meal> _favouriteMeals = [];
-  void _showInfoMessage(String message) {
-    ScaffoldMessenger.of(context).clearSnackBars();
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(SnackBar(content: Text(message)));
-  }
-
-  void _toggleFavouriteMealStatus(Meal meal) {
-    final isExisting = _favouriteMeals.contains(meal);
-
-    if (isExisting) {
-      _favouriteMeals.remove(meal);
-      _showInfoMessage('Meals Removed to Favourites !');
-    } else {
-      _favouriteMeals.add(meal);
-      _showInfoMessage('Meals Added as Favourites !');
-    }
-  }
 
   void _selectPage(int index) {
     setState(() {
@@ -72,6 +52,7 @@ class _TabScreenState extends ConsumerState<TabScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final favouriteMeals = ref.watch((favouriteMealsProvider));
     final meals = ref.watch((mealsProvider));
     final availableMeals = meals.where((meal) {
       if (_selectedFilters[Filter.glutenFree]! && meal.isGlutenFree) {
@@ -88,17 +69,11 @@ class _TabScreenState extends ConsumerState<TabScreen> {
       }
       return true;
     }).toList();
-    Widget activePage = CategoriesScreen(
-      toggleFavouriteMeal: _toggleFavouriteMealStatus,
-      availableMeals: availableMeals,
-    );
+    Widget activePage = CategoriesScreen(availableMeals: availableMeals);
     var activePageTitle = Text('Categories');
 
     if (selectedPageIndex == 1) {
-      activePage = MealsScreen(
-        meal: _favouriteMeals,
-        toggleFavouriteMeal: _toggleFavouriteMealStatus,
-      );
+      activePage = MealsScreen(meal: favouriteMeals);
       activePageTitle = Text('Favourites');
     }
     return Scaffold(

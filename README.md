@@ -1,6 +1,6 @@
 # mealmate
 
-A new Flutter project.
+This application helps people's to cook your own of multiple country's food. 
 
 ## Getting Started
 
